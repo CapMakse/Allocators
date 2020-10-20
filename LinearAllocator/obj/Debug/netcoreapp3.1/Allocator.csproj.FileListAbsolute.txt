@@ -1,0 +1,13 @@
+C:\Users\Max\source\repos\ОС\Allocator\bin\Debug\netcoreapp3.1\Allocator.exe
+C:\Users\Max\source\repos\ОС\Allocator\bin\Debug\netcoreapp3.1\Allocator.deps.json
+C:\Users\Max\source\repos\ОС\Allocator\bin\Debug\netcoreapp3.1\Allocator.runtimeconfig.json
+C:\Users\Max\source\repos\ОС\Allocator\bin\Debug\netcoreapp3.1\Allocator.runtimeconfig.dev.json
+C:\Users\Max\source\repos\ОС\Allocator\bin\Debug\netcoreapp3.1\Allocator.dll
+C:\Users\Max\source\repos\ОС\Allocator\bin\Debug\netcoreapp3.1\Allocator.pdb
+C:\Users\Max\source\repos\ОС\Allocator\obj\Debug\netcoreapp3.1\Allocator.csprojAssemblyReference.cache
+C:\Users\Max\source\repos\ОС\Allocator\obj\Debug\netcoreapp3.1\Allocator.csproj.CoreCompileInputs.cache
+C:\Users\Max\source\repos\ОС\Allocator\obj\Debug\netcoreapp3.1\Allocator.AssemblyInfoInputs.cache
+C:\Users\Max\source\repos\ОС\Allocator\obj\Debug\netcoreapp3.1\Allocator.AssemblyInfo.cs
+C:\Users\Max\source\repos\ОС\Allocator\obj\Debug\netcoreapp3.1\Allocator.dll
+C:\Users\Max\source\repos\ОС\Allocator\obj\Debug\netcoreapp3.1\Allocator.pdb
+C:\Users\Max\source\repos\ОС\Allocator\obj\Debug\netcoreapp3.1\Allocator.genruntimeconfig.cache
