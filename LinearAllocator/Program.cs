@@ -14,7 +14,6 @@ namespace Allocator
             int* d = (int*)Allocator.MemAlloc(4);
             *d = 9999;
             a = (int*)Allocator.MemReAlloc(a, 4);
-            Allocator.MemFree(a);
             Allocator.MemFree(d);
             Allocator.Dump();
         }

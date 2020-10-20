@@ -33,10 +33,10 @@ namespace Allocator
             int iter = 0;
             while (true)
             {
-                while (Memory[iter] == 1) { iter = NewIter(iter); }
+                while (Memory[iter] == 1) { iter = NextBlockIter(iter); }
                 if (CheckBlockLessThatSize(iter, size))
                 {
-                    iter = NewIter(iter);
+                    iter = NextBlockIter(iter);
                     if (iter == Memory.Length) return null;
                 }
                 else break;
@@ -97,10 +97,10 @@ namespace Allocator
             fixed (byte* byt = &Memory[iter + 1])
             {
                 Int32* block = (Int32*)byt;
-                return *block < size;
+                return *block < size + 5;
             }
         }
-        private int NewIter(int iter)
+        private int NextBlockIter(int iter)
         {
             fixed (byte* byt = &Memory[iter + 1])
             {
@@ -117,14 +117,14 @@ namespace Allocator
                 fixed (byte *block = &Memory[iter + 5])
                 {
                     if (Addr == block) return iter;
-                    iter = NewIter(iter);
+                    iter = NextBlockIter(iter);
                 }
             }
         }
         private void SplitBlocks()
         {
             int firstiter = 0;
-            int seconditer = NewIter(firstiter);
+            int seconditer = NextBlockIter(firstiter);
             while (true)
             { 
                 if (seconditer == Memory.Length) return;
@@ -140,7 +140,7 @@ namespace Allocator
                 }
                 else
                 firstiter = seconditer;
-                seconditer = NewIter(seconditer);
+                seconditer = NextBlockIter(seconditer);
             }
         }
     }
