@@ -33,7 +33,10 @@ namespace Allocator
             int iter = 0;
             while (true)
             {
-                while (Memory[iter] == 1) { iter = NextBlockIter(iter); }
+                while (Memory[iter] == 1) 
+                {
+                    iter = NextBlockIter(iter); 
+                }
                 if (CheckBlockLessThatSize(iter, size))
                 {
                     iter = NextBlockIter(iter);
@@ -48,7 +51,7 @@ namespace Allocator
                 Memory[iter] = 1;
                 Int32* block = (Int32*)byt;
                 Int32* newblock = (Int32*)newbyt;
-                *newblock = *block - size - 5 ;
+                *newblock = *block - size - 5;
                 *block = size;
                 return addr;
             }
@@ -57,11 +60,11 @@ namespace Allocator
         {
             if (Addr == null) return MemAlloc(newsize);
 
-            void* Addres = MemAlloc(newsize);
-            if (Addres == null) return null;
-
             int olditer = IterOfBlock(Addr);
             if (olditer == -1) return null;
+
+            void* Addres = MemAlloc(newsize);
+            if (Addres == null) return null;
 
             int size;
             fixed (byte *byt = &Memory[olditer + 1])
@@ -86,9 +89,25 @@ namespace Allocator
         }
         public void Dump()
         {
-            foreach (byte item in Memory)
+            for (int i = 0; i < Memory.Length; i++)
             {
-                Console.Write("{0} ", item);
+                fixed (byte* byt = &Memory[i + 1])
+                {
+                    Int32* blocklength = (Int32*)byt;
+                    Console.Write(Memory[i] + " : ");
+                    for (int j = 0; j < 4; j++)
+                    {
+                        i++;
+                        Console.Write(Memory[i] + " ");
+                    }
+                    Console.Write(": ");
+                    for (int j = 0; j < *blocklength; j++)
+                    {
+                        i++;
+                        Console.Write(Memory[i] + " ");
+                    }
+                    Console.WriteLine("");
+                }
             }
         }
         //////////
