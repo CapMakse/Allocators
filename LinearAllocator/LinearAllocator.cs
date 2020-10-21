@@ -6,12 +6,11 @@ using System.Text;
 
 namespace Allocator
 {
-    unsafe class LinearAllocator
+    unsafe static class LinearAllocator
     {
-        static LinearAllocator Instance;
-        byte[] Memory;
+        static byte[] Memory = new byte[1024];
 
-        private LinearAllocator()
+        static public void Initialize()
         {
             Memory = new byte[1024];
             fixed (byte* byt = &Memory[1])
@@ -20,14 +19,9 @@ namespace Allocator
                 *remainsize = Memory.Length - 5;
             }
         }
-        public static LinearAllocator GetInstance()
-        {
-            if (Instance == null) { Instance = new LinearAllocator(); }
-            return Instance;
-        }
 
         /////
-        public void* MemAlloc(int size)
+        static public void* MemAlloc(int size)
         {
             if (size % 4 != 0) return MemAlloc(size + 1);
             int iter = 0;
@@ -56,7 +50,7 @@ namespace Allocator
                 return addr;
             }
         }
-        public void *MemReAlloc(void *Addr, int newsize)
+        static public void *MemReAlloc(void *Addr, int newsize)
         {
             if (Addr == null) return MemAlloc(newsize);
 
@@ -80,14 +74,14 @@ namespace Allocator
             MemFree(Addr);
             return Addres;
         }
-        public void MemFree(void *Addr) 
+        static public void MemFree(void *Addr) 
         {
             int iter = IterOfBlock(Addr);
             if (iter == -1) return;
             Memory[iter] = 0;
             SplitBlocks();
         }
-        public void Dump()
+        static public void Dump()
         {
             for (int i = 0; i < Memory.Length; i++)
             {
@@ -111,7 +105,7 @@ namespace Allocator
             }
         }
         //////////
-        private bool CheckBlockLessThatSize(int iter, int size)
+        static private bool CheckBlockLessThatSize(int iter, int size)
         {
             fixed (byte* byt = &Memory[iter + 1])
             {
@@ -119,7 +113,7 @@ namespace Allocator
                 return *block < size + 5;
             }
         }
-        private int NextBlockIter(int iter)
+        static private int NextBlockIter(int iter)
         {
             fixed (byte* byt = &Memory[iter + 1])
             {
@@ -127,7 +121,7 @@ namespace Allocator
                 return iter + *incriter + 5;
             }
         }
-        private int IterOfBlock(void* Addr)
+        static private int IterOfBlock(void* Addr)
         {
             int iter = 0;
             while (true) 
@@ -140,7 +134,7 @@ namespace Allocator
                 }
             }
         }
-        private void SplitBlocks()
+        static private void SplitBlocks()
         {
             int firstiter = 0;
             int seconditer = NextBlockIter(firstiter);

@@ -8,14 +8,16 @@ namespace Allocator
     {
         unsafe static void Main()
         {
-            LinearAllocator Allocator = LinearAllocator.GetInstance();
-            int* a = (int*)Allocator.MemAlloc(8);
+            LinearAllocator.Initialize();
+            int* a = (int*)LinearAllocator.MemAlloc(12);
             *a = 9999;
-            int* d = (int*)Allocator.MemAlloc(4);
-            *d = 999;
-            a = (int*)Allocator.MemReAlloc(a, 4);
-            Allocator.MemFree(d);
-            Allocator.Dump();
+            int* b = (int*)LinearAllocator.MemAlloc(4);
+            *b = 1234;
+            a = (int*)LinearAllocator.MemReAlloc(a, 4);
+            int* c = (int*)LinearAllocator.MemAlloc(4);
+            *c = 7777;
+            LinearAllocator.MemFree(b);
+            LinearAllocator.Dump();
         }
     }
 }
